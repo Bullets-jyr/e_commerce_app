@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'core/theme/theme_data.dart';
 import 'presentation/routes/routes.dart';
 
 void main() {
@@ -13,19 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
+      theme: CustomThemeData.themeData,
     );
-    // return MaterialApp(
-    //   home: Scaffold(
-    //     body: Center(
-    //       child: Text(
-    //         'Hello World!',
-    //       ),
-    //     ),
-    //   ),
-    //   theme: ThemeData(
-    //     useMaterial3: true,
-    //     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-    //   ),
-    // );
   }
 }

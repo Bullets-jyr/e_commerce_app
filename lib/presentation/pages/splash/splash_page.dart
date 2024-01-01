@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/theme/constant/app_icons.dart';
 import '../../routes/routes_path.dart';
 
 class SplashPage extends StatefulWidget {
@@ -23,11 +24,11 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SvgPicture.asset('assets/svg/main_logo.svg'),
-      ),
       // TODO 하드코딩 된 값 변경할 것
-      backgroundColor: Color(0xFF5F0080),
+      body: Center(
+        child: SvgPicture.asset(AppIcons.mainLogo),
+      ),
+      backgroundColor: Theme.of(context).colorScheme.primary,
     );
   }
 }
