@@ -1,56 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/constant/app_icons.dart';
+import '../../../../core/theme/custom/custom_theme.dart';
+import '../../cubit/mall_type_cubit.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.primary,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
-        child: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SvgPicture.asset(AppIcons.mainLogo),
-          ),
-          title: Text(
-            'tabBar',
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall
-                ?.copyWith(color: Colors.white),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: SvgPicture.asset(
-                AppIcons.location,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.background,
-                  BlendMode.srcIn,
+    return BlocBuilder<MallTypeCubit, MallType>(
+      builder: (_, state) {
+        return AnimatedContainer(
+          color: (state.isMarket)
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.background,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
+            child: AppBar(
+                leading: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset(
+                    AppIcons.mainLogo,
+                    colorFilter: ColorFilter.mode(
+                      state.isMarket
+                          ? Theme.of(context).colorScheme.onPrimary
+                          : Theme.of(context).colorScheme.primary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: SvgPicture.asset(
-                AppIcons.cart,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.background,
-                  BlendMode.srcIn,
+                title: DefaultTabController(
+                  length: MallType.values.length,
+                  initialIndex: state.index,
+                  child: TabBar(
+                    tabs: List.generate(
+                      MallType.values.length,
+                      (index) => Tab(text: MallType.values[index].toName),
+                    ),
+                    labelColor: Colors.black,
+                    unselectedLabelColor: Colors.black,
+                    onTap: (index) =>
+                        context.read<MallTypeCubit>().changeIndex(index),
+                  ),
                 ),
-              ),
-            ),
-          ],
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-          leadingWidth: 86.0,
-        ),
-      ),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: SvgPicture.asset(
+                      AppIcons.location,
+                      colorFilter: ColorFilter.mode(
+                        state.isMarket
+                            ? Theme.of(context).colorScheme.background
+                            : Theme.of(context).colorScheme.contentPrimary,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: SvgPicture.asset(
+                      AppIcons.cart,
+                      colorFilter: ColorFilter.mode(
+                        state.isMarket
+                            ? Theme.of(context).colorScheme.background
+                            : Theme.of(context).colorScheme.contentPrimary,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                ],
+                backgroundColor: Colors.transparent,
+                centerTitle: true,
+                leadingWidth: 86.0),
+          ),
+          duration: const Duration(milliseconds: 400),
+        );
+      },
     );
   }
 }
