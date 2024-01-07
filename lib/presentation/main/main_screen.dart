@@ -15,11 +15,14 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MainScreenView();
-    // return BlocProvider(
-    //   create: (_) => BottomNavCubit(),
-    //   child: const MainScreenView(),
-    // );
+    // return const MainScreenView();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => BottomNavCubit()),
+        BlocProvider(create: (_) => MallTypeCubit()),
+      ],
+      child: const MainScreenView(),
+    );
   }
 }
 
