@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/theme/theme_data.dart';
 import 'core/utils/constant.dart';
+import 'core/utils/exception/common_exception.dart';
+import 'core/utils/logger.dart';
 import 'data/data_source/mock/display_mock_api.dart';
 import 'data/repository_impl/display.repository_impl.dart';
 import 'domain/usecase/display/display.usecase.dart';
@@ -22,9 +24,19 @@ void main() async {
 
   setLocator();
   // final menus = await DisplayUsecase(DisplayRepositoryImpl(DisplayMockApi())).execute(usecase: GetMenusUsecase(mallType: MallType.market));
-  final menus = await locator<DisplayUsecase>()
-      .execute(usecase: GetMenusUsecase(mallType: MallType.market));
-  print(menus);
+  // final menus = await locator<DisplayUsecase>()
+  //     .execute(usecase: GetMenusUsecase(mallType: MallType.market));
+  // print(menus);
+
+  try {
+    final test = await DisplayMockApi().getMenusByMallType('market');
+    // print(test);
+    CustomLogger.logger.d(test);
+  } catch(error) {
+    final errorData = CommonException.setError(error);
+    CustomLogger.logger.e(errorData);
+  }
+
   runApp(const MyApp());
 }
 

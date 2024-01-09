@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import '../../dto/common/response_wrapper/response_wrapper.dart';
 import '../../dto/display/menu/menu_dto.dart';
@@ -9,6 +10,7 @@ class DisplayMockApi implements DisplayApi {
   @override
   // Future<List<MenuDto>> getMenusByMallType(String mallType) {
   Future<ResponseWrapper<List<MenuDto>>> getMenusByMallType(String mallType) {
+    throw SocketException('exception_test');
     return Future(
       () => ResponseWrapper(
         status: 'SUCCESS',
