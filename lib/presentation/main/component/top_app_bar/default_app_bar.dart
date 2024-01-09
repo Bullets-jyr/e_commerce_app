@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theme/custom/custom_theme.dart';
+import '../../../../core/utils/constant.dart';
 import '../../cubit/bottom_nav_cubit.dart';
 import '../../cubit/mall_type_cubit.dart';
 
