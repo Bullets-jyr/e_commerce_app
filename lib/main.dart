@@ -14,8 +14,8 @@ import 'presentation/main/cubit/mall_type_cubit.dart';
 import 'presentation/routes/routes.dart';
 import 'service_locator.dart';
 
-void main() async {
-// void main() {
+// void main() async {
+void main() {
   // final data = await DisplayMockApi().getMenusByMallType('market');
   // print(data);
 
@@ -28,14 +28,14 @@ void main() async {
   //     .execute(usecase: GetMenusUsecase(mallType: MallType.market));
   // print(menus);
 
-  try {
-    final test = await DisplayMockApi().getMenusByMallType('market');
-    // print(test);
-    CustomLogger.logger.d(test);
-  } catch(error) {
-    final errorData = CommonException.setError(error);
-    CustomLogger.logger.e(errorData);
-  }
+  // try {
+  //   final test = await DisplayMockApi().getMenusByMallType('market');
+  //   // print(test);
+  //   CustomLogger.logger.d(test);
+  // } catch(error) {
+  //   final errorData = CommonException.setError(error);
+  //   CustomLogger.logger.e(errorData);
+  // }
 
   runApp(const MyApp());
 }

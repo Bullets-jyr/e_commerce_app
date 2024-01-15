@@ -10,12 +10,15 @@ class DisplayMockApi implements DisplayApi {
   @override
   // Future<List<MenuDto>> getMenusByMallType(String mallType) {
   Future<ResponseWrapper<List<MenuDto>>> getMenusByMallType(String mallType) {
-    throw SocketException('exception_test');
+    // throw SocketException('exception_test');
     return Future(
       () => ResponseWrapper(
-        status: 'SUCCESS',
-        code: '0000',
-        message: '',
+        // status: 'SUCCESS',
+        status: 'fail',
+        // code: '0000',
+        code: 'GNB-0000',
+        // message: '',
+        message: '서비스 에러가 발생했습니다.',
         data: _menuParser(
           mallType == 'market'
               ? DisplayMockData.menusByMarket
